@@ -1,0 +1,13 @@
+server:
+  port: 8086
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/reviewdb
+    username: root
+    password: rohan911
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
