@@ -2,6 +2,9 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: API-GATEWAY
+
   cloud:
     gateway:
       routes:
@@ -41,10 +44,9 @@ spring:
           predicates:
             - Path=/admin/**
 
-
-discovery:
-      locator:
-        enabled: true
+      discovery:
+        locator:
+          enabled: true   # 🔥 FIXED POSITION
 
 eureka:
   client:
