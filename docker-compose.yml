@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+
+  eureka-server:
+    build: ./eureka-server
+    ports:
+      - "8761:8761"
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka-server
+
+  user-service:
+    build: ./user-service
+    depends_on:
+      - eureka-server
+
+  order-service:
+    build: ./order-service
+    depends_on:
+      - user-service
+      - payment-service
+
+  payment-service:
+    build: ./payment-service
+    depends_on:
+      - eureka-server
+      - rabbitmq
+
+  invoice-service:
+    build: ./invoice-service
+    depends_on:
+      - eureka-server
+
+  notification-service:
+    build: ./notification-service
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
